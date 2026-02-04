@@ -1,0 +1,42 @@
+<?php
+class Homepagectr implements LoggerInterface{
+    public static $instance = null;
+    private $launcher;
+    private $logger;
+    private $username;
+
+    public static function getInstance($launcher) {
+        if (self::$instance == null) {
+            self::$instance = new Homepagectr($launcher);
+        }
+        return self::$instance;
+    }
+
+    private function __construct($launcher) {
+        $this->launcher = $launcher;
+        $this->launcher->Lib('common-flows/viewobj');
+        $this->launcher->Lib('files/Filebean');
+        $this->logger = new Filebean();
+        $this->username = $this->launcher->getDefaultSessionUsername();
+    }
+
+    public function DebugMessage(string $message): void{
+        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "[DEBUG] " . $message);
+    }
+
+    public function InfoMessage(string $message): void{
+        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "[INFO] " . $message);
+    }
+
+    public function ErrorMessage(string $message): void{
+        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "[ERROR] " . $message);
+    }
+
+    public function index(){
+        $data['title'] = "Salvina Hijab - Premium Hijab Collection";
+        $data['base_url'] = $this->launcher->baseUrl;
+        $this->DebugMessage('Accessing Landing Page');
+        $this->launcher->View("homepage/index.homepage",$data);
+    }
+
+}
