@@ -40,16 +40,17 @@
             border-radius: 0;
         }
 
-        /* Hero Carousel */
+        /* Hero Carousel - Full Width */
         .hero-carousel {
-            margin-top: 20px;
+            margin-top: 0;
+            padding: 0;
         }
 
         .hero-carousel .carousel-item img {
             width: 100%;
-            height: 500px;
+            height: 600px;
             object-fit: cover;
-            border-radius: 15px;
+            border-radius: 0;
         }
 
         .carousel-control-prev-icon,

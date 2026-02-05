@@ -11,24 +11,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="https://d2kchovjbwl1tk.cloudfront.net/vendors/171/assets/image/1693878683040-Lowercase3_1_resized256-png.webp" alt="Salvina Hijab">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include_once $data['homedir'] . 'view/fragments/nav/top-nav.homepage.php'; ?>
 
     <!-- Alert Banner -->
     <div class="alert alert-banner text-center mb-0" role="alert">
@@ -36,7 +19,7 @@
     </div>
 
     <!-- Hero Carousel -->
-    <div class="container hero-carousel">
+    <div class="container-fluid hero-carousel px-0">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>

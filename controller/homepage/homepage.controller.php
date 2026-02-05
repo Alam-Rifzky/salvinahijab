@@ -35,8 +35,11 @@ class Homepagectr implements LoggerInterface{
     public function index(){
         $data['title'] = "Salvina Hijab - Premium Hijab Collection";
         $data['base_url'] = $this->launcher->baseUrl;
+        $data['homedir'] = $this->launcher->homedir;
         $this->DebugMessage('Accessing Landing Page');
         $this->launcher->View("homepage/index.homepage",$data);
     }
+
+    // public function (){}
 
 }

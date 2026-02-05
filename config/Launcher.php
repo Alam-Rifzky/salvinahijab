@@ -8,6 +8,9 @@ class Launcher {
 	public $databaseusername;
 	// public static $databasepassword = 'mx-5.m@zd@SP33DHUNTER#2025'; // SIT,UAT,PRODUCTION
 	public $databasepassword;
+    private $env;
+    private $routeFound = false;
+
     private function __construct() {
         $this->baseUrl = "http://localhost:8080/salvinahijab/";
         $this->homedir = 'C:/xampp/htdocs/salvinahijab/';
@@ -15,6 +18,7 @@ class Launcher {
         $this->database = 'salvinahijab';
         $this->databaseusername = 'rifzky';
         $this->databasepassword = '4vr1lLavigne';
+        $this->env = 'local';
     }
 
     public static function getInstance() {
@@ -66,5 +70,32 @@ class Launcher {
 
     public function getDefaultSessionUsername(){
         return (isset($_SESSION['username'])) ? $_SESSION['username'] : str_replace(':','_',$_SERVER['REMOTE_ADDR']);
+    }
+
+    public function GetRoutePath($reqUri){
+        $path = trim(parse_url($reqUri, PHP_URL_PATH), '/');
+        $segments = explode('/', $path);
+        
+        $key      = ($this->env=='local') ? $segments[2] ?? null : $segments[1] ?? null;
+        $offset   = ($this->env=='local') ? 3 : 2;
+        $segments = ($key!=null) ? array_slice($segments, $offset) : [];
+
+        return [
+            'key' => $key,
+            'segments' => $segments
+        ];
+    }
+
+    public function RouteMapping($key, $mapping){
+        if ($key == $mapping){
+            $this->routeFound = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getRouteFound(){
+        return $this->routeFound;
     }
 }
