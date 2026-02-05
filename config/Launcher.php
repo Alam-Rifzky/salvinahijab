@@ -15,9 +15,9 @@ class Launcher {
         $this->baseUrl = "http://localhost:8080/salvinahijab/";
         $this->homedir = 'C:/xampp/htdocs/salvinahijab/';
         $this->databasehost = 'localhost';
-        $this->database = 'salvinahijab';
-        $this->databaseusername = 'rifzky';
-        $this->databasepassword = '4vr1lLavigne';
+        $this->database = 'u2032818_data'; //'salvinahijab';
+        $this->databaseusername = 'facinsti_rifzky'; //'rifzky';
+        $this->databasepassword = 'bmwM3GTR@2025!!'; //4vr1lLavigne';
         $this->env = 'local';
     }
 
@@ -64,7 +64,8 @@ class Launcher {
     public function getLogPaths(){
         return [
             'userLogs' => $this->homedir.'logs/userlogs/',
-            'visitorLogs' => $this->homedir.'logs/visitorlogs/'
+            'visitorLogs' => $this->homedir.'logs/visitorlogs/',
+            'authLogs' => $this->homedir.'logs/auth/'
         ];
     }
 
@@ -97,5 +98,22 @@ class Launcher {
 
     public function getRouteFound(){
         return $this->routeFound;
+    }
+
+    public function getLoggerObject(){
+        $this->Lib('files/Filebean');
+        return new Filebean();
+    }
+
+    public function CallModelUtil(){
+        $this->Lib('utils/Modelutil');
+        $this->Model('core/Drivermodel');
+        $coreModel = new Drivermdl($this);
+        return new Modelutil($coreModel);
+    }
+
+    public function CallServiceUtil(){
+        $this->Lib('utils/Serviceutil');
+        return new Serviceutil($this);
     }
 }

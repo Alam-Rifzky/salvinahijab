@@ -15,21 +15,20 @@ class Homepagectr implements LoggerInterface{
     private function __construct($launcher) {
         $this->launcher = $launcher;
         $this->launcher->Lib('common-flows/viewobj');
-        $this->launcher->Lib('files/Filebean');
-        $this->logger = new Filebean();
+        $this->logger = $this->launcher->getLoggerObject();
         $this->username = $this->launcher->getDefaultSessionUsername();
     }
 
     public function DebugMessage(string $message): void{
-        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "[DEBUG] " . $message);
+        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "Homepagectr - " . $message,'DEBUG');
     }
 
     public function InfoMessage(string $message): void{
-        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "[INFO] " . $message);
+        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "Homepagectr - " . $message,'INFO');
     }
 
     public function ErrorMessage(string $message): void{
-        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "[ERROR] " . $message);
+        $this->logger->WriteLog($this->launcher->getLogPaths()['visitorLogs'], $this->username, "Homepagectr - " . $message,'ERROR');
     }
 
     public function index(){
