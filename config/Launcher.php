@@ -6,6 +6,8 @@ class Launcher {
     public $databasehost;
 	public $database; 
 	public $databaseusername;
+    public $redisHost;
+    public $redisPort;
 	// public static $databasepassword = 'mx-5.m@zd@SP33DHUNTER#2025'; // SIT,UAT,PRODUCTION
 	public $databasepassword;
     private $env;
@@ -19,6 +21,8 @@ class Launcher {
         $this->databaseusername = 'facinsti_rifzky'; //'rifzky';
         $this->databasepassword = 'bmwM3GTR@2025!!'; //4vr1lLavigne';
         $this->env = 'local';
+        $this->redisHost = '127.0.0.1';
+        $this->redisPort = 6379;
     }
 
     public static function getInstance() {
@@ -27,6 +31,7 @@ class Launcher {
         }
         return self::$instance;
     }
+    
 
 
     public function callController($controllername){
@@ -67,6 +72,11 @@ class Launcher {
             'visitorLogs' => $this->homedir.'logs/visitorlogs/',
             'authLogs' => $this->homedir.'logs/auth/'
         ];
+    }
+
+    public function GetExternalVariable($variableName){
+        $this->JustInclude('config/ext_variables/' . $variableName);
+        return GetVariable();
     }
 
     public function getDefaultSessionUsername(){
@@ -115,5 +125,10 @@ class Launcher {
     public function CallServiceUtil(){
         $this->Lib('utils/Serviceutil');
         return new Serviceutil($this);
+    }
+
+    public function CallVendorUtil(){
+        $this->Lib('utils/Vendorutil');
+        return new Vendorutil($this);
     }
 }

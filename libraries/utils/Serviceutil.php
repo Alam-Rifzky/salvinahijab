@@ -11,4 +11,9 @@ class Serviceutil {
         $this->launcher->callService("authentication/Loginservice");
         return new Loginservice($this->launcher);
     }
+
+    public function CallRabbitMQService(){
+        $this->launcher->callService("messagebroker/Rabbitmqservice");
+        return new Rabbitmqservice($this->launcher);
+    }
 }
